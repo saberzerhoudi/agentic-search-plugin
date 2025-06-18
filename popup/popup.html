@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Search Assistant</title>
+    <link rel="stylesheet" href="popup.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <h1>AI Search Assistant</h1>
+        </header>
+
+        <main class="app-content">
+            <!-- Section 1: Current Session Info -->
+            <section class="card stats-card compact-card">
+                <div class="card-header">
+                    <h2>Active Session</h2>
+                </div>
+                <div class="card-content">
+                    <div id="session-info" class="skeleton">Loading session data...</div>
+                </div>
+            </section>
+
+            <!-- Section 2: Persona Management -->
+            <section class="card">
+                <div class="card-header">
+                    <h2>Persona Management</h2>
+                </div>
+                <div class="card-content">
+                    <div class="persona-actions">
+                        <button id="load-persona" class="btn btn-secondary">
+                            <svg viewBox="0 0 24 24" class="icon">
+                                <path
+                                    d="M12 6v3l4-4-4-4v3c-4.42 0-8 3.58-8 8 0 1.57.46 3.03 1.24 4.26L6.7 14.8c-.45-.83-.7-1.79-.7-2.8 0-3.31 2.69-6 6-6zm6.76 1.74L17.3 9.2c.44.84.7 1.79.7 2.8 0 3.31-2.69 6-6 6v-3l-4 4 4 4v-3c4.42 0 8-3.58 8-8 0-1.57-.46-3.03-1.24-4.26z"
+                                    fill="currentColor"></path>
+                            </svg>
+                            Preload Persona
+                        </button>
+                        <button id="construct-persona" class="btn btn-secondary">
+                            <svg viewBox="0 0 24 24" class="icon">
+                                <path
+                                    d="M19 3h-4.18C14.4 1.84 13.3 1 12 1c-1.3 0-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm0 4c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm6 12H6v-1.4c0-2 4-3.1 6-3.1s6 1.1 6 3.1V19z"
+                                    fill="currentColor"></path>
+                            </svg>
+                            Construct Persona
+                        </button>
+                        <button id="edit-persona" class="btn btn-secondary">
+                            <svg viewBox="0 0 24 24" class="icon">
+                                <path
+                                    d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"
+                                    fill="currentColor"></path>
+                            </svg>
+                            Edit Persona
+                        </button>
+                        <button id="export-persona" class="btn btn-secondary">
+                            <svg viewBox="0 0 24 24" class="icon">
+                                <path
+                                    d="M19 12v7H5v-7H3v7c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-7h-2zm-6 .67l2.59-2.58L17 11.5l-5 5-5-5 1.41-1.41L11 12.67V3h2z"
+                                    fill="currentColor"></path>
+                            </svg>
+                            Export Persona
+                        </button>
+                    </div>
+                    <div id="persona-status" class="status-message"></div>
+                </div>
+            </section>
+
+            <!-- Section 3: LLM Configuration -->
+            <section class="card">
+                <div class="card-header with-tabs">
+                    <h2 class="compact-title">LLM Config</h2>
+                    <div class="tab-group compact-tabs">
+                        <button id="cloud-tab" class="tab active" data-target="cloud-llm-form">Cloud</button>
+                        <button id="local-tab" class="tab" data-target="local-llm-form">Local</button>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <!-- Cloud LLM Configuration -->
+                    <div id="cloud-llm-form" class="tab-content">
+                        <p class="text-muted">Configure external LLM provider API access.</p>
+
+                        <div class="form-group">
+                            <label for="llm-provider">LLM Provider</label>
+                            <select id="llm-provider" class="select">
+                                <option value="openai">OpenAI</option>
+                                <option value="anthropic">Anthropic (Claude)</option>
+                                <option value="cohere">Cohere</option>
+                                <option value="mistral">Mistral AI</option>
+                            </select>
+                        </div>
+
+                        <div id="key-setup-form">
+                            <div class="form-group">
+                                <label for="api-key">API Key</label>
+                                <div class="input-wrapper">
+                                    <input type="password" id="api-key" placeholder="Enter your API key" />
+                                    <button id="toggle-api-visibility" class="input-icon"
+                                        aria-label="Toggle API key visibility">
+                                        <svg viewBox="0 0 24 24" class="icon">
+                                            <path
+                                                d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"
+                                                fill="currentColor"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="encryption-password">Create a password</label>
+                                <input type="password" id="encryption-password" placeholder="Password" />
+                                <div class="password-strength-meter">
+                                    <div class="strength-bar"></div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="confirm-password">Confirm password</label>
+                                <input type="password" id="confirm-password" placeholder="Confirm password" />
+                            </div>
+                            <button id="save-api-key" class="btn btn-primary btn-block">Save API Key</button>
+                        </div>
+
+                        <div id="api-key-status" class="status-message"></div>
+                    </div>
+
+                    <!-- Local LLM Configuration -->
+                    <div id="local-llm-form" class="tab-content" style="display: none;">
+                        <p class="text-muted">Use a lightweight LLM that runs directly in your browser.</p>
+
+                        <div class="form-group">
+                            <label for="local-model">Select Model</label>
+                            <select id="local-model" class="select">
+                                <option value="smol2">SmolLM2</option>
+                                <option value="qwen25">Qwen2.5 (1B)</option>
+                                <option value="llama32">Llama 3.2 (1B)</option>
+                                <option value="falcon3">Falcon3 (1B)</option>
+                                <option value="deepseek">Deepseek R1 (1.5B)</option>
+                            </select>
+                        </div>
+
+                        <div class="resource-info">
+                            <div class="resource-item">
+                                <span class="resource-icon">
+                                    <svg viewBox="0 0 24 24" class="icon">
+                                        <path
+                                            d="M15 9H9v6h6V9zm-2 4h-2v-2h2v2zm8-2c0 5.52-4.48 10-10 10S1 16.52 1 11 5.48 1 11 1s10 4.48 10 10zm-2 0c0-4.42-3.58-8-8-8s-8 3.58-8 8 3.58 8 8 8 8-3.58 8-8z"
+                                            fill="currentColor"></path>
+                                    </svg>
+                                </span>
+                                <div class="resource-details">
+                                    <div class="resource-label">Download Size</div>
+                                    <div id="model-size" class="resource-value">500-1500 MB</div>
+                                </div>
+                            </div>
+                            <div class="resource-item">
+                                <span class="resource-icon">
+                                    <svg viewBox="0 0 24 24" class="icon">
+                                        <path
+                                            d="M16 6V4c0-1.1-.9-2-2-2h-4c-1.1 0-2 .9-2 2v2H4c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-4zm-6-2h4v2h-4V4zM9 17.07V9.83c0-.38.4-.62.74-.44l6.03 3.21c.33.18.36.65.04.86l-6.03 4.02c-.33.22-.78-.01-.78-.41z"
+                                            fill="currentColor"></path>
+                                    </svg>
+                                </span>
+                                <div class="resource-details">
+                                    <div class="resource-label">Memory Usage</div>
+                                    <div id="model-memory" class="resource-value">1-2 GB RAM</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="model-actions">
+                            <button id="download-model" class="btn btn-primary">
+                                <svg viewBox="0 0 24 24" class="icon">
+                                    <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" fill="currentColor"></path>
+                                </svg>
+                                Download Model
+                            </button>
+                            <div id="download-progress" class="progress-bar-container" style="display: none;">
+                                <div class="progress-bar"></div>
+                                <div class="progress-text">0%</div>
+                            </div>
+                        </div>
+
+                        <div id="local-model-status" class="status-message"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 4: Tracking Settings -->
+            <section class="card">
+                <div class="card-header">
+                    <h2>Tracking Settings</h2>
+                </div>
+                <div class="card-content">
+                    <div class="setting-group compact">
+                        <div class="switch-setting">
+                            <label for="content-capture" class="switch-label">
+                                Capture page content
+                            </label>
+                            <label class="switch">
+                                <input type="checkbox" id="content-capture" checked>
+                                <span class="switch-slider"></span>
+                            </label>
+                        </div>
+                        <p class="text-muted setting-description">Store the content of visited pages for analysis.</p>
+                    </div>
+
+                    <div class="setting-group compact">
+                        <div class="switch-setting">
+                            <label for="query-analysis" class="switch-label">
+                                Analyze search queries
+                            </label>
+                            <label class="switch">
+                                <input type="checkbox" id="query-analysis" checked>
+                                <span class="switch-slider"></span>
+                            </label>
+                        </div>
+                        <p class="text-muted setting-description">Process your search patterns to improve persona
+                            modeling.</p>
+                    </div>
+
+                    <div class="setting-group compact">
+                        <div class="switch-setting">
+                            <label for="browsing-pattern" class="switch-label">
+                                Track browsing patterns
+                            </label>
+                            <label class="switch">
+                                <input type="checkbox" id="browsing-pattern" checked>
+                                <span class="switch-slider"></span>
+                            </label>
+                        </div>
+                        <p class="text-muted setting-description">Monitor navigation patterns to improve search
+                            suggestions.</p>
+                    </div>
+
+                    <div class="setting-group compact">
+                        <label for="log-level" class="setting-label">Log Detail Level</label>
+                        <select id="log-level" class="select">
+                            <option value="basic">Basic</option>
+                            <option value="detailed" selected>Detailed</option>
+                            <option value="comprehensive">Comprehensive</option>
+                        </select>
+                        <p class="text-muted setting-description">Controls how much information is logged for your
+                            persona.</p>
+                    </div>
+
+                    <div class="setting-group compact">
+                        <label for="data-retention" class="setting-label">Data Retention</label>
+                        <select id="data-retention" class="select">
+                            <option value="session">Current Session Only</option>
+                            <option value="day">24 Hours</option>
+                            <option value="week" selected>1 Week</option>
+                            <option value="month">1 Month</option>
+                            <option value="unlimited">Unlimited</option>
+                        </select>
+                        <p class="text-muted setting-description">How long to keep your search data before
+                            auto-deletion.</p>
+                    </div>
+
+                    <button id="save-settings" class="btn btn-primary">Save Settings</button>
+
+                    <div class="option-row manage-data">
+                        <button id="view-logs" class="btn btn-text">
+                            <svg viewBox="0 0 24 24" class="icon">
+                                <path d="M3 4h18v2H3V4zm0 7h18v2H3v-2zm0 7h18v2H3v-2z" fill="currentColor"></path>
+                            </svg>
+                            View Logs
+                        </button>
+                        <button id="export-data" class="btn btn-text">
+                            <svg viewBox="0 0 24 24" class="icon">
+                                <path d="M13 5v6h6l-6 7-6-7h6V5z" fill="currentColor"></path>
+                            </svg>
+                            Export Data
+                        </button>
+                        <button id="clear-data" class="btn btn-text btn-danger-text">
+                            <svg viewBox="0 0 24 24" class="icon">
+                                <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"
+                                    fill="currentColor"></path>
+                            </svg>
+                            Clear Data
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="app-footer">
+            <div class="footer-content">
+                <p class="version">Version 1.0</p>
+                <p class="status" id="connection-status">
+                    <span class="status-dot online"></span> Connected
+                </p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="/utils/secure-storage.js" type="module"></script>
+    <script src="popup.js"></script>
+</body>
+
+</html>
