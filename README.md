@@ -2,6 +2,8 @@
 
 A novel browser extension framework that combines probabilistic user modeling with Large Language Model (LLM) reasoning to provide personalized search assistance while preserving user privacy through client-side processing.
 
+![PersonaSearch Architecture](images/peronasearch.png)
+
 ## Overview
 
 PersonaSearch is a Firefox browser extension that implements a cognitive-aware search assistant based on the research paper "PersonaSearch: A Unified Framework for Privacy-Preserving, Cognitive-Aware Search Assistance". The system learns from user search behavior to provide contextual suggestions without transmitting personal data to external servers.
@@ -127,23 +129,6 @@ The system implements a Markov Decision Process where:
 - Encryption keys are derived from user passwords using PBKDF2
 - No telemetry or analytics data is collected by the extension
 
-## Research Foundation
-
-This implementation is based on the academic paper:
-> "PersonaSearch: A Unified Framework for Privacy-Preserving, Cognitive-Aware Search Assistance"
-
-### Key Research Contributions
-1. **Hybrid Architecture**: Novel combination of probabilistic modeling with LLM reasoning
-2. **Privacy Preservation**: Entirely client-side learning and inference pipeline
-3. **Behavioral Grounding**: Use of MDP formalization for search behavior modeling
-4. **Empirical Validation**: Demonstrated improvements in search efficiency and user satisfaction
-
-### Experimental Results
-The research validation showed:
-- **58.7% prediction accuracy** for personalized models vs. 31.2% for generic models
-- **36.4% suggestion acceptance rate** indicating valuable user assistance
-- **Improved search efficiency**: Reduced session length (5.2 vs 6.8 queries)
-- **Enhanced query complexity**: More descriptive queries (4.1 vs 3.5 terms)
 
 ## Development
 
@@ -226,20 +211,5 @@ PersonaSearch/
 - Extended evaluation across diverse search domains
 - Real-time adaptation to changing user information needs
 
-## Citation
 
-If you use PersonaSearch in your research, please cite the original paper:
-
-```bibtex
-@article{personasearch2024,
-  title={PersonaSearch: A Unified Framework for Privacy-Preserving, Cognitive-Aware Search Assistance},
-  author={[Authors]},
-  journal={[Journal]},
-  year={2024}
-}
-```
-
-## License
-
-This project is released under the MIT License. See `LICENSE` file for details.
 
