@@ -63,7 +63,7 @@ Powered by `utils/openai-service.js`, providing:
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/your-repo/PersonaSearch
+   git clone https://github.com/saberzerhoudi/PersonaSearch
    cd PersonaSearch
    ```
 
