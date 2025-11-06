@@ -13,7 +13,7 @@ This repository contains the source code for the paper **In-Browser Agents for S
 
 > A fundamental tension exists between the demand for sophisticated AI assistance in web search and the need for user data privacy. Current centralized models require users to transmit sensitive browsing data to external services, which limits user control. In this paper, we present a browser extension that provides a viable in-browser alternative. We introduce a hybrid architecture that functions entirely on the client side, combining two components: (1) an adaptive probabilistic model that learns a user's behavioral policy from direct feedback, and (2) a Small Language Model (SLM), running in the browser, which is grounded by the probabilistic model to generate context-aware suggestions. To evaluate this approach, we conducted a three-week longitudinal user study with 18 participants. Our results show that this privacy-preserving approach is highly effective at adapting to individual user behavior, leading to measurably improved search efficiency. This work demonstrates that sophisticated AI assistance is achievable without compromising user privacy or data control.
 
-**Keywords**: *Search Personalization • User Modeling • Browser Extension • Small Language Models *
+**Keywords**: *Search Personalization • User Modeling • Browser Extension • Small Language Models*
 
 ---
 
@@ -23,21 +23,13 @@ A novel browser extension framework that combines probabilistic user modeling wi
 
 ### 🎥 Plugin Interface Demo
 
-Watch the extension in action:
-
-https://github.com/user-attachments/assets/plugin_display.mp4
-
-<video src="videos/plugin_display.mp4" width="100%" controls></video>
+https://github.com/user-attachments/assets/YOUR_VIDEO_ID_1
 
 *The PersonaSearch extension popup interface showing real-time search assistance and persona management*
 
 ### 🎥 Search Interface Demo
 
-See how the extension provides intelligent search suggestions:
-
-https://github.com/user-attachments/assets/search_interface.mp4
-
-<video src="videos/search_interface.mp4" width="100%" controls></video>
+https://github.com/user-attachments/assets/YOUR_VIDEO_ID_2
 
 *AI-powered query refinement and contextual suggestions during a search session*
 
@@ -46,6 +38,10 @@ https://github.com/user-attachments/assets/search_interface.mp4
 ![Search Interface Screenshot](images/screenshot_search.png)
 
 *PersonaSearch seamlessly integrates with Google Search to provide contextual assistance*
+
+---
+
+**To add the videos:** Edit this README on GitHub, drag and drop the video files from `videos/plugin_display.mp4` and `videos/search_interface.mp4`, and GitHub will automatically generate the asset URLs. Replace `YOUR_VIDEO_ID_1` and `YOUR_VIDEO_ID_2` with the generated URLs.
 
 ---
 
