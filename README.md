@@ -23,26 +23,31 @@ A novel browser extension framework that combines probabilistic user modeling wi
 
 ### 🎥 Plugin Interface Demo
 
+<p align="center">
+
 https://github.com/user-attachments/assets/361c7569-7c5a-4fb2-9802-6c9c5b7955e9
 
-*The PersonaSearch extension popup interface showing real-time search assistance and persona management*
+</p>
+
+<p align="center"><em>The PersonaSearch extension popup interface showing real-time search assistance and persona management</em></p>
 
 ### 🎥 Search Interface Demo
 
+<p align="center">
+
 https://github.com/user-attachments/assets/1c2d4604-1261-40a5-8352-129d7e8ff20d
 
+</p>
 
-*AI-powered query refinement and contextual suggestions during a search session*
+<p align="center"><em>AI-powered query refinement and contextual suggestions during a search session</em></p>
 
 ### 📸 Screenshot
 
-![Search Interface Screenshot](images/screenshot_search.png)
+<p align="center">
+  <img src="images/screenshot_search.png" alt="Search Interface Screenshot" width="80%">
+</p>
 
-*PersonaSearch seamlessly integrates with Google Search to provide contextual assistance*
-
----
-
-**To add the videos:** Edit this README on GitHub, drag and drop the video files from `videos/plugin_display.mp4` and `videos/search_interface.mp4`, and GitHub will automatically generate the asset URLs. Replace `YOUR_VIDEO_ID_1` and `YOUR_VIDEO_ID_2` with the generated URLs.
+<p align="center"><em>PersonaSearch seamlessly integrates with Google Search to provide contextual assistance</em></p>
 
 ---
 
