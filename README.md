@@ -1,8 +1,53 @@
-# PersonaSearch: Privacy-Preserving Cognitive Search Assistant
+# In-Browser Agents for Search Assistance
+
+![PersonaSearch Architecture](images/persona_search.png)
+
+[![Paper](https://img.shields.io/badge/Paper-arXiv-b31b1b?style=flat-square)](https://arxiv.org)
+[![License](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)](LICENSE)
+
+This repository contains the source code for the paper **In-Browser Agents for Search Assistance**.
+
+---
+
+## Abstract
+
+> A fundamental tension exists between the demand for sophisticated AI assistance in web search and the need for user data privacy. Current centralized models require users to transmit sensitive browsing data to external services, which limits user control. In this paper, we present a browser extension that provides a viable in-browser alternative. We introduce a hybrid architecture that functions entirely on the client side, combining two components: (1) an adaptive probabilistic model that learns a user's behavioral policy from direct feedback, and (2) a Small Language Model (SLM), running in the browser, which is grounded by the probabilistic model to generate context-aware suggestions. To evaluate this approach, we conducted a three-week longitudinal user study with 18 participants. Our results show that this privacy-preserving approach is highly effective at adapting to individual user behavior, leading to measurably improved search efficiency. This work demonstrates that sophisticated AI assistance is achievable without compromising user privacy or data control.
+
+**Keywords**: *Search Personalization • User Modeling • Browser Extension • Small Language Models *
+
+---
 
 A novel browser extension framework that combines probabilistic user modeling with Large Language Model (LLM) reasoning to provide personalized search assistance while preserving user privacy through client-side processing.
 
-![PersonaSearch Architecture](images/peronasearch.png)
+## Demo & Screenshots
+
+### 🎥 Plugin Interface Demo
+
+Watch the extension in action:
+
+https://github.com/user-attachments/assets/plugin_display.mp4
+
+<video src="videos/plugin_display.mp4" width="100%" controls></video>
+
+*The PersonaSearch extension popup interface showing real-time search assistance and persona management*
+
+### 🎥 Search Interface Demo
+
+See how the extension provides intelligent search suggestions:
+
+https://github.com/user-attachments/assets/search_interface.mp4
+
+<video src="videos/search_interface.mp4" width="100%" controls></video>
+
+*AI-powered query refinement and contextual suggestions during a search session*
+
+### 📸 Screenshot
+
+![Search Interface Screenshot](images/screenshot_search.png)
+
+*PersonaSearch seamlessly integrates with Google Search to provide contextual assistance*
+
+---
 
 ## Overview
 
@@ -10,19 +55,19 @@ PersonaSearch is a Firefox browser extension that implements a cognitive-aware s
 
 ## Key Features
 
-### 🔒 Privacy-First Architecture
+### Privacy-First Architecture
 - **Client-side processing**: All behavioral analysis and learning occurs locally
 - **Encrypted storage**: API keys and sensitive data are encrypted using Web Crypto API
 - **No data transmission**: User behavior data never leaves the browser
 - **User control**: Complete transparency and control over data collection
 
-### 🧠 Hybrid AI Architecture
+### Hybrid AI Architecture
 - **Behavioral observation**: Captures search patterns, clicks, and dwell times
 - **Probabilistic modeling**: Uses Markov Decision Process (MDP) for behavioral prediction
 - **LLM integration**: Leverages OpenAI GPT models for contextual query refinement
 - **Adaptive learning**: Continuously personalizes based on user feedback
 
-### 🎯 Intelligent Search Assistance
+### Intelligent Search Assistance
 - **Query refinement**: AI-powered suggestions to improve search effectiveness
 - **Contextual awareness**: Understands user intent within search sessions
 - **Non-intrusive interface**: Passive assistance that preserves user agency

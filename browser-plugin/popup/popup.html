@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Search Assistant</title>
+    <link rel="stylesheet" href="popup.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <h1>AI Search Assistant</h1>
+        </header>
+
+        <main class="app-content">
+            <nav class="tab-nav">
+                <button class="tab-btn active" data-tab="control-panel">
+                    <svg viewBox="0 0 24 24" class="icon">
+                        <path d="M3 17v2h6v-2H3zm0-8v2h10V9H3zm0 4v2h14v-2H3zM17 3v18h2V3h-2z" fill="currentColor"></path>
+                    </svg>
+                    <span>Control</span>
+                </button>
+                <button class="tab-btn" data-tab="data-panel">
+                    <svg viewBox="0 0 24 24" class="icon">
+                        <path d="M2 20h20v-4H2v4zm0-6h20v-4H2v4zm0-10v4h20V4H2z" fill="currentColor"></path>
+                    </svg>
+                    <span>Data</span>
+                </button>
+                <button class="tab-btn" data-tab="system-panel">
+                    <svg viewBox="0 0 24 24" class="icon">
+                        <path d="M19.43 12.98c.04-.32.07-.64.07-.98s-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.23-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98s.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.23.09.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5S10.07 8.5 12 8.5s3.5 1.57 3.5 3.5S13.93 15.5 12 15.5z" fill="currentColor"></path>
+                    </svg>
+                    <span>System</span>
+                </button>
+            </nav>
+
+            <div class="tab-content-wrapper">
+                <!-- Control Tab -->
+                <div id="control-panel" class="tab-panel active">
+                    <section class="card">
+                <div class="card-header">
+                    <h2>Active Session</h2>
+                </div>
+                <div class="card-content">
+                    <div id="session-info" class="skeleton">Loading session data...</div>
+                </div>
+            </section>
+
+                    <section class="card">
+                        <div class="card-header">
+                            <h2>Tracking Settings</h2>
+                        </div>
+                        <div class="card-content">
+                            <div class="agent-toggle">
+                                <div class="agent-header">
+                                    <label for="content-capture">Capture page content</label>
+                                    <label class="switch">
+                                        <input type="checkbox" id="content-capture" checked>
+                                        <span class="switch-slider"></span>
+                                    </label>
+                                </div>
+                                <p class="text-muted">Store the content of visited pages for analysis.</p>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="log-level">Log Detail Level</label>
+                                <select id="log-level" class="select">
+                                    <option value="basic">Basic</option>
+                                    <option value="detailed" selected>Detailed</option>
+                                    <option value="comprehensive">Comprehensive</option>
+                                </select>
+                                <p class="text-muted setting-description">Controls how much information is logged.</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="card">
+                        <div class="card-header">
+                            <h2>Agent Controls</h2>
+                        </div>
+                        <div class="card-content">
+                            <div class="setting-row">
+                                <label for="max-steps">Max Steps</label>
+                                <input type="number" id="max-steps" class="input-small" value="25" min="1" max="100">
+                            </div>
+                            <div class="setting-row">
+                                <label for="highlight-elements">Highlight Elements</label>
+                                <label class="switch"><input type="checkbox" id="highlight-elements" checked><span class="switch-slider"></span></label>
+                            </div>
+                            <div class="setting-row">
+                                <label for="thinking-mode">Thinking Mode</label>
+                                <label class="switch"><input type="checkbox" id="thinking-mode" checked><span class="switch-slider"></span></label>
+                            </div>
+                            <div class="setting-row">
+                                <label for="vision-mode">Vision Mode</label>
+                                <label class="switch"><input type="checkbox" id="vision-mode"><span class="switch-slider"></span></label>
+                            </div>
+                            <div class="setting-row">
+                                <label for="flash-mode">Flash Mode</label>
+                                <label class="switch"><input type="checkbox" id="flash-mode"><span class="switch-slider"></span></label>
+                            </div>
+                        </div>
+                    </section>
+
+            <section class="card">
+                <div class="card-header">
+                            <h2>Agents</h2>
+                        </div>
+                        <div class="card-content">
+                            <div class="agent-toggle">
+                                <div class="agent-header">
+                                    <label for="serp-agent">SERP Agent</label>
+                                    <label class="switch"><input type="checkbox" id="serp-agent" checked><span class="switch-slider"></span></label>
+                                </div>
+                                <p class="text-muted">Scans search engine results, analyzing and highlighting what's relevant.</p>
+                            </div>
+                            <div class="agent-toggle">
+                                <div class="agent-header">
+                                    <label for="scraping-agent">Scraping Agent</label>
+                                    <label class="switch"><input type="checkbox" id="scraping-agent" checked><span class="switch-slider"></span></label>
+                                </div>
+                                <p class="text-muted">Gathers full content from specific web pages.</p>
+                            </div>
+                            <div class="agent-toggle">
+                                <div class="agent-header">
+                                    <label for="fact-checking-agent">Fact-Checking Agent</label>
+                                    <label class="switch"><input type="checkbox" id="fact-checking-agent"><span class="switch-slider"></span></label>
+                                </div>
+                                <p class="text-muted">Verifies information for accuracy before adding to the knowledge base.</p>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- Data Tab -->
+                <div id="data-panel" class="tab-panel">
+                    <section class="card">
+                        <div class="card-header">
+                            <h2>Knowledge Base</h2>
+                </div>
+                <div class="card-content">
+                            <div class="agent-toggle">
+                                <div class="agent-header">
+                                    <label for="use-indexed-files">Index Local Files</label>
+                                    <label class="switch"><input type="checkbox" id="use-indexed-files"><span class="switch-slider"></span></label>
+                                </div>
+                                <p class="text-muted">Allow agents to reference files from a local directory.</p>
+                            </div>
+                            <div class="form-group">
+                                <label for="folder-path">Folder Path</label>
+                                <div class="input-wrapper">
+                                    <input type="text" id="folder-path" placeholder="e.g., /Users/me/Documents/Research">
+                                    <button id="select-folder-btn" class="input-icon" aria-label="Select Folder">
+                                        <svg viewBox="0 0 24 24" class="icon"><path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z" fill="currentColor"></path></svg>
+                        </button>
+                    </div>
+                            </div>
+                </div>
+            </section>
+
+            <section class="card">
+                        <div class="card-header">
+                            <h2>Data Management</h2>
+                        </div>
+                        <div class="card-content button-group">
+                            <button id="view-logs" class="btn btn-secondary">
+                                <svg viewBox="0 0 24 24" class="icon"><path d="M3 4h18v2H3V4zm0 7h18v2H3v-2zm0 7h18v2H3v-2z" fill="currentColor"></path></svg>
+                                <span>View Logs</span>
+                            </button>
+                            <button id="export-data" class="btn btn-secondary">
+                                <svg viewBox="0 0 24 24" class="icon"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" fill="currentColor"></path></svg>
+                                <span>Export Data</span>
+                            </button>
+                            <button id="clear-data" class="btn btn-danger">
+                                <svg viewBox="0 0 24 24" class="icon"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z" fill="currentColor"></path></svg>
+                                <span>Clear Data</span>
+                            </button>
+                    </div>
+                    </section>
+                </div>
+
+                <!-- System Tab -->
+                <div id="system-panel" class="tab-panel">
+                    <section class="card">
+                        <div class="card-header">
+                            <h2>Models & API</h2>
+                </div>
+                <div class="card-content">
+                            <div class="segmented">
+                                <button class="segment active" data-target="cloud-config">Cloud</button>
+                                <button class="segment" data-target="local-config">Local</button>
+                            </div>
+
+                            <div id="cloud-config" class="segment-panel surface active">
+                        <div class="form-group">
+                            <label for="llm-provider">LLM Provider</label>
+                            <select id="llm-provider" class="select">
+                                <option value="openai">OpenAI</option>
+                                <option value="anthropic">Anthropic (Claude)</option>
+                                <option value="cohere">Cohere</option>
+                                <option value="mistral">Mistral AI</option>
+                            </select>
+                        </div>
+                            <div class="form-group">
+                                <label for="api-key">API Key</label>
+                                <div class="input-wrapper">
+                                    <input type="password" id="api-key" placeholder="Enter your API key" />
+                                        <button id="toggle-api-visibility" class="input-icon" aria-label="Toggle API key visibility">
+                                            <svg viewBox="0 0 24 24" class="icon"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z" fill="currentColor"></path></svg>
+                                    </button>
+                                </div>
+                                </div>
+                                <button id="save-api-key" class="btn btn-primary">Save API Key</button>
+                                <div id="api-key-status" class="alert" style="display:none;"></div>
+                        </div>
+
+                            <div id="local-config" class="segment-panel surface" style="display:none;">
+                        <div class="form-group">
+                            <label for="local-model">Select Model</label>
+                            <select id="local-model" class="select">
+                                        <option value="smol2">SmolLM2 (0.5B)</option>
+                                <option value="qwen25">Qwen2.5 (1B)</option>
+                                <option value="llama32">Llama 3.2 (1B)</option>
+                                        <option value="falcon3">Falcon 3 (1B)</option>
+                                        <option value="deepseek">DeepSeek R1 (1.5B)</option>
+                            </select>
+                        </div>
+                        <div class="resource-info">
+                            <div class="resource-item">
+                                <span class="resource-icon">
+                                            <svg viewBox="0 0 24 24" class="icon"><path d="M15 9H9v6h6V9zm-2 4h-2v-2h2v2zm8-2c0 5.52-4.48 10-10 10S1 16.52 1 11 5.48 1 11 1s10 4.48 10 10zm-2 0c0-4.42-3.58-8-8-8s-8 3.58-8 8 3.58 8 8 8 8-3.58 8-8z" fill="currentColor"></path></svg>
+                                </span>
+                                <div class="resource-details">
+                                    <div class="resource-label">Download Size</div>
+                                    <div id="model-size" class="resource-value">500-1500 MB</div>
+                                </div>
+                            </div>
+                            <div class="resource-item">
+                                <span class="resource-icon">
+                                            <svg viewBox="0 0 24 24" class="icon"><path d="M16 6V4c0-1.1-.9-2-2-2h-4c-1.1 0-2 .9-2 2v2H4c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-4zm-6-2h4v2h-4V4zM9 17.07V9.83c0-.38.4-.62.74-.44l6.03 3.21c.33.18.36.65.04.86l-6.03 4.02c-.33.22-.78-.01-.78-.41z" fill="currentColor"></path></svg>
+                                </span>
+                                <div class="resource-details">
+                                    <div class="resource-label">Memory Usage</div>
+                                    <div id="model-memory" class="resource-value">1-2 GB RAM</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="model-actions">
+                            <button id="download-model" class="btn btn-primary">
+                                        <svg viewBox="0 0 24 24" class="icon"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" fill="currentColor"></path></svg>
+                                Download Model
+                            </button>
+                            <div id="download-progress" class="progress-bar-container" style="display: none;">
+                                <div class="progress-bar"></div>
+                                <div class="progress-text">0%</div>
+                            </div>
+                        </div>
+                                <div id="local-model-status" class="alert" style="display:none;"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="card">
+                <div class="card-header">
+                            <h2>System Configuration</h2>
+                        </div>
+                        <div class="card-content">
+                            <div class="form-group">
+                                <label for="database-backend">Database Backend</label>
+                                <select id="database-backend" class="select">
+                                    <option value="indexeddb">IndexedDB + IDB-Keyval</option>
+                                    <option value="duckdb">DuckDB-WASM</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="proactivity-level-select">Passive Mode: Proactivity</label>
+                                <select id="proactivity-level-select" class="select">
+                                    <option value="off">Off — only on explicit commands</option>
+                                    <option value="hints">Hints Only — non-intrusive suggestions</option>
+                                    <option value="assistive" selected>Assistive — suggest and summarize on demand</option>
+                                    <option value="active">Active — auto-summarize current page</option>
+                                    <option value="autonomous">Autonomous — explore related pages</option>
+                                </select>
+                                <p id="proactivity-desc" class="text-muted">Assistive — suggest and summarize on demand</p>
+                    </div>
+                            <div class="form-group">
+                                <label>Proactivity Types</label>
+                                <div class="checkbox-group">
+                                    <label><input type="checkbox" name="proactivity-type" value="suggest-searches"> Suggest searches</label>
+                                    <label><input type="checkbox" name="proactivity-type" value="summarize-pages"> Summarize pages</label>
+                                    <label><input type="checkbox" name="proactivity-type" value="find-related"> Find related info</label>
+                        </div>
+                    </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </main>
+
+        <footer class="app-footer">
+            <div class="footer-content">
+                <p class="version">Version 2.0</p>
+                <div id="save-status" class="status-message"></div>
+                <p class="status" id="connection-status">
+                    <span class="status-dot online"></span> Connected
+                </p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+
+</html>
